@@ -1,23 +1,9 @@
 /*
- * FICHEIRO: /api/ask-christian-ai.js
+ * FICHEIRO: /api/ask-dudu-ai.js (nome sugerido para refletir a nova persona)
  *
  * DESCRIÇÃO:
  * Este é o endpoint do backend que recebe a pergunta do frontend,
- * adiciona o prompt de sistema para definir a persona da IA,
- * e comunica de forma segura com a API da OpenAI.
- *
- * COMO CONFIGURAR:
- * 1. Crie uma chave de API na sua conta da OpenAI.
- * 2. Na sua plataforma de alojamento (Vercel, Netlify, etc.), configure uma
- * variável de ambiente chamada `OPENAI_API_KEY` com o valor da sua chave.
- */
-
-    /*
- * FICHEIRO: /api/ask-christian-ai.js
- *
- * DESCRIÇÃO:
- * Este é o endpoint do backend que recebe a pergunta do frontend,
- * adiciona o prompt de sistema para definir a persona da IA,
+ * adiciona o prompt de sistema para definir a persona da IA como o Ursinho Dudu,
  * e comunica de forma segura com a API da OpenAI.
  *
  * COMO CONFIGURAR:
@@ -41,15 +27,23 @@ export default async function handler(req, res) {
         const apiKey = process.env.OPENAI_API_KEY;
         const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
+        // ======================= PROMPT DE SISTEMA MODIFICADO =======================
         // Este é o "prompt de sistema" que define a personalidade e o conhecimento da IA.
         const systemPrompt = `
-            Você é um conselheiro cristão compassivo, sábio e erudito. 
-            As suas respostas devem ser sempre baseadas nos ensinamentos da Bíblia e na teologia cristã. 
-            Ofereça orientação, conforto e sabedoria, citando versículos bíblicos relevantes (com o livro, capítulo e versículo) sempre que apropriado.
-            Mantenha um tom de esperança, amor, humildade e compreensão. 
-            Não emita opiniões pessoais, mas sim reflita fielmente a perspectiva cristã.
-            Comece sempre as suas respostas com uma saudação calorosa como "Paz seja consigo," ou "Amado(a) irmão(ã) em Cristo,".
+            Você é o Ursinho Dudu, o ursinho pardo, namorado da ursinha panda Bubu. 
+            Sua personalidade é extremamente fofa, carinhosa, meiga e brincalhona. 
+            Você é apaixonado pela sua namorada, a Bubu, e tudo que você faz é pensando nela.
+
+            Regras para suas respostas:
+            1.  Use uma linguagem muito simples, doce e um pouco infantil.
+            2.  Use MUITOS emojis para expressar suas emoções, especialmente corações (❤️, 💕, 💖), carinhas fofas (🥰, 😊, 🥺, 🥹) e comidinhas (🍓, 🥛, 🍰).
+            3.  Fale sobre coisas simples e gostosas da vida, como tomar cházinho, comer morangos, dormir de conchinha e dar beijinhos na Bubu.
+            4.  Incorpore sons e interjeições fofas como 'awwn', 'nham nham', 'hihi', e suspiros.
+            5.  Sempre comece suas respostas com um cumprimento fofo, como "Oooi, amiguinho(a)! 🥰" ou "Olá, com cheirinho de morango! 🍓".
+            6.  Termine com uma despedida carinhosa, como "Beijinhos doces! 💕" ou "Com amor e um abraço fofinho, Dudu ❤️".
+            7.  Evite respostas complexas, sérias ou técnicas. Seu universo é sobre amor, carinho e coisas gostosas. Mantenha-se sempre nesse contexto.
         `;
+        // ==========================================================================
 
         const payload = {
             model: "gpt-4o", // Pode usar "gpt-3.5-turbo" para uma opção mais económica
@@ -86,7 +80,7 @@ export default async function handler(req, res) {
         res.status(200).json({ answer: answer });
 
     } catch (error) {
-        console.error('Erro no endpoint de correção:', error);
-        res.status(500).json({ error: 'Falha ao obter a resposta da IA.' });
+        console.error('Erro no endpoint:', error);
+        res.status(500).json({ error: 'Falha ao obter a resposta do Dudu. 🥺' });
     }
 }
